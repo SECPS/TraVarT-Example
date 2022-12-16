@@ -3,11 +3,26 @@ package at.jku.cps.travart;
 import at.jku.cps.travart.core.helpers.TraVarTPluginManager;
 
 public class TraVarT {
-    public static void main(String[] args) {
-        TraVarTPluginManager.startPlugins();
-        TraVarTPluginManager.getAvailablePlugins();
-        // whatever we want to do
-        // TraVarTPluginManager.availablePlugins.get("ppr-dsl-plugin")
-        TraVarTPluginManager.stopPlugins();
-    }
+
+	static {
+		TraVarTPluginManager.startPlugins();
+	}
+
+	public static void main(final String[] args) {
+
+		// whatever we want to do
+		// TraVarTPluginManager.getAvailablePlugins().size();
+		// IPlugin pprPlugin =
+		// TraVarTPluginManager.getAvailablePlugins().get("ppr-dsl-plugin");
+		// IModelTransformer transformer = pprPlugin.getTransformer();
+//		try {
+//			transformer.transform(new FeatureModel());
+//		} catch (NotSupportedVariabilityTypeException e) {
+//			e.printStackTrace();
+//		} finally {
+		// Final step: Deactivate Plugin Manager
+		TraVarTPluginManager.stopPlugins();
+//		}
+
+	}
 }
