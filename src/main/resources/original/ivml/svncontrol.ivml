@@ -1,0 +1,5 @@
+project svncontrol {
+    Boolean OPT_HOOKS = false;
+	Boolean OPT_SCHEDULES = true;
+	Boolean OPT_WSAUTHENTICATION = false;
+}

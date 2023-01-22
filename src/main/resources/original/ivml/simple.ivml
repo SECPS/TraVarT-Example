@@ -1,0 +1,16 @@
+project simple {
+    Integer elevators = 2;
+    Integer floors;
+    String name = "Prankur";
+    Boolean controlling_synchronized;
+    Boolean controlling_accelerated = true;
+    Boolean display_target = true;
+    Boolean display_openingside;
+    elevators > 1;
+    elevators < 6;
+    floors > 0;
+    floors < 5;
+    controlling_accelerated == true;
+    display_target != true implies floors = 1;
+    controlling_synchronized == true implies elevators >= 3;
+}

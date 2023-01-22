@@ -1,0 +1,5 @@
+project NumericCSVInstantiationTest {
+	Boolean enabled = true;
+	Boolean disabled = false;
+	Integer aIntValue = 5;
+}

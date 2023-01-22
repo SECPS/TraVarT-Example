@@ -11,9 +11,10 @@ mvn clean package -DskipTests
 # copy required files into travart-run
 cp plugins/*.jar travart-run/plugins
 cp target/travart-*-SNAPSHOT.zip travart-run
+cp -r src/main/resources travart-run/resources
 
 # change the current directory
-cd travart-run
+cd travart-run || exit
 
 # delete exting file
 rm -f plugins/enabled.txt
