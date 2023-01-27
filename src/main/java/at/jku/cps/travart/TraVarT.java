@@ -1,5 +1,6 @@
 package at.jku.cps.travart;
 
+import static at.jku.cps.travart.Constants.IVML_PLUGIN_NAME;
 import static at.jku.cps.travart.Constants.RESOURCES_PATH;
 
 import at.jku.cps.travart.core.common.IPlugin;
@@ -7,40 +8,43 @@ import at.jku.cps.travart.core.exception.NotSupportedVariabilityTypeException;
 import at.jku.cps.travart.core.exception.PluginNotFoundException;
 import at.jku.cps.travart.core.helpers.TraVarTPluginManager;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TraVarT {
-
     static {
         TraVarTPluginManager.startPlugins();
     }
 
     public static void main(final String[] args)
-        throws NotSupportedVariabilityTypeException, IOException, PluginNotFoundException,
-        URISyntaxException {
-        TraVarTPluginManager.startPlugins();
-        TraVarTPluginManager.getAvailablePlugins();
+        throws NotSupportedVariabilityTypeException, IOException, PluginNotFoundException {
         final Path baseFolderPath =
             Paths.get(Paths.get(".").toRealPath().toString(), RESOURCES_PATH);
 
         final TraVarTTransformer traVarTTransformer = new TraVarTTransformer();
-        run_IVML_UVL_IVML(baseFolderPath, traVarTTransformer);
+        runTransformation(baseFolderPath, traVarTTransformer, IVML_PLUGIN_NAME, IVML_PLUGIN_NAME);
 
         // Final step: Deactivate Plugin Manager
         TraVarTPluginManager.stopPlugins();
     }
 
-    //TODO: it doesn't run; needs fixing
-    private static void run_IVML_UVL_IVML(final Path baseFolder,
-                                          final TraVarTTransformer traVarTTransformer)
+    private static void runTransformation(final Path baseFolder, final TraVarTTransformer traVarTTransformer, final String inputPluginName,
+                                          final String outputPluginName)
         throws NotSupportedVariabilityTypeException, IOException, PluginNotFoundException {
         // checks if the plugin is there in the system
-        final IPlugin ivmlPlugin = TraVarTPluginManager.getAvailablePlugins().get("ivml-plugin");
+        final IPlugin inputPlugin = TraVarTPluginManager.getAvailablePlugins().get(inputPluginName);
+        if (inputPlugin == null) {
+            throw new PluginNotFoundException("Plugin not found with name - " + inputPluginName);
+        }
+
+        final IPlugin outputPlugin = TraVarTPluginManager.getAvailablePlugins().get(outputPluginName);
+        if (outputPlugin == null) {
+            throw new PluginNotFoundException("Plugin not found with name - " + outputPluginName);
+        }
+
         traVarTTransformer.transform(
-            ivmlPlugin,
-            ivmlPlugin,
+            inputPlugin,
+            outputPlugin,
             baseFolder
         );
     }
