@@ -1,4 +1,13 @@
 #!/bin/sh
+#*******************************************************************************
+# TODO: explanation what the class does
+#  
+# @author Kevin Feichtinger
+#  
+# Copyright 2023 Johannes Kepler University Linz
+# LIT Cyber-Physical Systems Lab
+# All rights reserved
+#*******************************************************************************
 # Note that the necessary jars should already be in the plugins/ directory as JAR files
 
 # create a runner directory inside TraVarT
